@@ -39,11 +39,6 @@ class Input extends React.Component {
 
   // END : life cycle methods -- local storage
 
-  clear = e => {
-    e.preventDefault();
-    localStorage.clear();
-  };
-
   handleChange = e => {
     this.setState(
       {
@@ -77,6 +72,12 @@ class Input extends React.Component {
     );
   };
 
+  //testing ability to clear LS//need to expand to delete li elements as well
+  clear = e => {
+    e.preventDefault();
+    localStorage.clear();
+  };
+
   render() {
     ///////// console.log(this.state.newTodo);
     // NEED: to find way to get babel to stop changing my jsx "" to ''
@@ -101,7 +102,7 @@ class Input extends React.Component {
             add y0 todo
           </button>
         </form>
-        <ul className='list-group'>
+        <ul id='ul' className='list-group'>
           {this.state.todoList.map((item, index) => (
             <li key={index} className='list-group-item'>
               {/* {console.log(item, index)} */}
