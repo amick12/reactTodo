@@ -26,18 +26,23 @@ class Input extends React.Component {
     this.setState(
       {
         todoList: newList
-      }
-      // ,() => console.log('newList', newList)
+      },
+      () => console.log('newList', newList)
     );
   }
 
-  // -didupdate method--
+  // // -didupdate method--
   componentDidUpdate() {
     // console.log('DidUpdate', JSON.stringify(this.state.todoList));
     localStorage.setItem('todos', JSON.stringify(this.state.todoList));
   }
 
   // END : life cycle methods -- local storage
+
+  clear = e => {
+    e.preventDefault();
+    localStorage.clear();
+  };
 
   handleChange = e => {
     this.setState(
@@ -67,8 +72,8 @@ class Input extends React.Component {
       {
         todoList: updateTodoList,
         newTodo: ''
-      }
-      // ,() => console.log('THIS state', this.state)
+      },
+      () => console.log('THIS state', this.state)
     );
   };
 
@@ -104,6 +109,9 @@ class Input extends React.Component {
             </li>
           ))}
         </ul>
+        <button className='mt-3' onClick={this.clear}>
+          Clear All
+        </button>
       </React.Fragment>
     );
   }
