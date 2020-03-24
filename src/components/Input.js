@@ -58,7 +58,7 @@ class Input extends React.Component {
 
     //create constant to hold new, updated array
     //need: attach newTodo to todoList array
-    ///////////--> can't push bc 1) illegal to directly mutate state
+    ///////////----->   no push  1) illegal to directly mutate state
     /////////////////////////////2) push returns array length ---> concat?
 
     const updateTodoList = this.state.todoList.concat(newTodo);
