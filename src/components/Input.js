@@ -73,9 +73,11 @@ class Input extends React.Component {
   };
 
   render() {
-    // console.log(this.state.newTodo);
+    ///////// console.log(this.state.newTodo);
     // NEED: to find way to get babel to stop changing my jsx "" to ''
     /////////before I lose my mind...HTML = "" JS = '', da**it, Babel.
+
+    // NEED: to disable submit when input value is 0 ---> required
 
     return (
       <React.Fragment>
@@ -87,12 +89,21 @@ class Input extends React.Component {
               placeholder='yuz haz nu todoz?'
               value={this.state.newTodo}
               onChange={this.handleChange}
+              required
             />
           </div>
           <button type='submit' className='btn btn-block btn-info mt-1'>
             add y0 todo
           </button>
         </form>
+        <ul className='list-group'>
+          {this.state.todoList.map((item, index) => (
+            <li key={index} className='list-group-item'>
+              {/* {console.log(item, index)} */}
+              {`${item.title}`}
+            </li>
+          ))}
+        </ul>
       </React.Fragment>
     );
   }
