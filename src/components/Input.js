@@ -1,5 +1,6 @@
 import React from 'react';
-// import List from './List';
+import List from './List';
+import Delete from './Delete';
 
 //input will require state ---> use class
 
@@ -21,6 +22,8 @@ class Input extends React.Component {
     // console.log('DidMount');
     //TypeError: this.state.todoList is null
     //////////////// NEED: to check if null first? --> ||
+    // console.log(localStorage.todos);
+
     let newList = JSON.parse(localStorage.getItem('todos')) || [];
 
     this.setState(
@@ -80,9 +83,6 @@ class Input extends React.Component {
 
   render() {
     ///////// console.log(this.state.newTodo);
-    // NEED: to find way to get babel to stop changing my jsx "" to ''
-    /////////before I lose my mind...HTML = "" JS = '', da**it, Babel.
-
     // NEED: to disable submit when input value is 0 ---> required
 
     return (
@@ -102,17 +102,13 @@ class Input extends React.Component {
             add y0 todo
           </button>
         </form>
-        <ul id='ul' className='list-group'>
-          {this.state.todoList.map((item, index) => (
-            <li key={index} className='list-group-item'>
-              {/* {console.log(item, index)} */}
-              {`${item.title}`}
-            </li>
-          ))}
+        <ul>
+          <List list={this.state.todoList} />
         </ul>
-        <button className='mt-3' onClick={this.clear}>
+        <button className='mt-3 mb-3' onClick={this.clear}>
           Clear All
         </button>
+        <Delete />
       </React.Fragment>
     );
   }

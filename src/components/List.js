@@ -1,13 +1,14 @@
-// import React from 'react';
+import React from 'react';
 
-// function List(props) {
-//   {
-//   }
-//   return (
-//     <div>
-//       <p>hello from list</p>
-//     </div>
-//   );
-// }
+function List(props) {
+  // create constant for mapping fx ---- use props from Input.js
+  const renderListItems = props.list.map((item, index) => (
+    <li key={index} className='list-group-item'>
+      {/* {console.log(item, index)} */}
+      {`${item.title}`}
+    </li>
+  ));
+  return <div>{renderListItems}</div>;
+}
 
-// export default List;
+export default List;
