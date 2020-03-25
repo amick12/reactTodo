@@ -8,9 +8,10 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
     // initialize state
+
     this.state = {
-      newTodo: '',
-      todoList: []
+      todoList: [],
+      newTodo: ''
     };
   }
 
@@ -29,8 +30,8 @@ class Input extends React.Component {
     this.setState(
       {
         todoList: newList
-      },
-      () => console.log('newList', newList)
+      }
+      // ,() => console.log('newList', newList)
     );
   }
 
@@ -51,17 +52,21 @@ class Input extends React.Component {
     );
   };
 
-  //fx to execute on submit
+  ////////
+  // NEED: fx to execute on submit
+  //////// a way to derive a unique key (no index) --> Date.now()
+
   gotSubmitted = e => {
     e.preventDefault();
     const newTodo = {
-      title: this.state.newTodo
+      description: this.state.newTodo,
+      key: Date.now()
     };
-    // console.log('gotSubmitted - newTodo', newTodo);
+    console.log('gotSubmitted - newTodo', newTodo);
 
     //create constant to hold new, updated array
     //need: attach newTodo to todoList array
-    ///////////----->   no push  1) illegal to directly mutate state
+    /////////// --->  no push ** 1) illegal to directly mutate state
     /////////////////////////////2) push returns array length ---> concat?
 
     const updateTodoList = this.state.todoList.concat(newTodo);
@@ -70,8 +75,8 @@ class Input extends React.Component {
       {
         todoList: updateTodoList,
         newTodo: ''
-      },
-      () => console.log('THIS state', this.state)
+      }
+      // ,() => console.log('THIS state', this.state)
     );
   };
 
@@ -82,9 +87,9 @@ class Input extends React.Component {
   };
 
   render() {
-    ///////// console.log(this.state.newTodo);
+    ////////
     // NEED: to disable submit when input value is 0 ---> required
-
+    ////////
     return (
       <React.Fragment>
         <form onSubmit={this.gotSubmitted}>
@@ -102,7 +107,7 @@ class Input extends React.Component {
             add y0 todo
           </button>
         </form>
-        <ul>
+        <ul className='p-0'>
           <List list={this.state.todoList} />
         </ul>
         <button className='mt-3 mb-3' onClick={this.clear}>
