@@ -1,5 +1,6 @@
 import React from 'react';
 import List from './List';
+import Buttons from './Buttons';
 import Delete from './Delete';
 
 //input will require state ---> use class
@@ -81,6 +82,7 @@ class Input extends React.Component {
   };
 
   //testing ability to clear LS//need to expand to delete li elements as well
+
   clear = e => {
     e.preventDefault();
     localStorage.clear();
@@ -110,9 +112,7 @@ class Input extends React.Component {
         <ul className='p-0'>
           <List list={this.state.todoList} />
         </ul>
-        <button className='mt-3 mb-3' onClick={this.clear}>
-          Clear All
-        </button>
+        <Buttons clickClear={this.clear} />
         <Delete />
       </React.Fragment>
     );
