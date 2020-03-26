@@ -96,7 +96,7 @@ class Input extends React.Component {
           <div className='form-group'>
             <input
               type='text'
-              className='form-control text-center'
+              className='form-control text-center form-control-lg'
               placeholder='yuz haz nu todoz?'
               value={this.state.newTodo}
               onChange={this.handleChange}

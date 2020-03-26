@@ -9,7 +9,7 @@ function List(props) {
   const renderListItems = props.list.map((item, index) => (
     <div className='row' key={item.key}>
       <div className='col'>
-        {console.log({ item, index }, item.key)}
+        {/* {console.log({ item, index }, item.key)} */}
         <li className='list-group-item'>
           {`${item.description}`}
           <input
