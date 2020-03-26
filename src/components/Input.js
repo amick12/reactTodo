@@ -1,7 +1,10 @@
 import React from 'react';
 import List from './List';
 import Buttons from './Buttons';
-import Delete from './Delete';
+
+//TODO: once finished testing, move state/methods to App.js - so input === input
+
+let updateTodoList;
 
 //input will require state ---> use class
 
@@ -70,7 +73,7 @@ class Input extends React.Component {
     /////////// --->  no push ** 1) illegal to directly mutate state
     /////////////////////////////2) push returns array length ---> concat?
 
-    const updateTodoList = this.state.todoList.concat(newTodo);
+    updateTodoList = this.state.todoList.concat(newTodo);
 
     this.setState(
       {
@@ -81,11 +84,40 @@ class Input extends React.Component {
     );
   };
 
-  //testing ability to clear LS//need to expand to delete li elements as well
+  // create checked fx
+  // NEED: 1) determine which item has been checked
+  /////////////// --> logic using input chkbx name/value
+  /////////2) css to strike out item
+
+  // NEED: ability to clear LS// expand to delete li elements post succ test
+  // add setState to clear li el --> new arr var to indir manip state
 
   clear = e => {
     e.preventDefault();
     localStorage.clear();
+    let clearedList = [];
+
+    this.setState({
+      todoList: clearedList
+    });
+  };
+  ////////////////////
+  // delete function
+  /////// NEED: 1) to be able to determine which item is to be deleted
+  //////////////////// ---> via key // if not = to del key add to filtArr
+  ///////////// 2) reset state of todoList to post del arr
+  deleteTodo = e => {
+    //
+    let postDelete = this.state.items.filter(item => {
+      if (item.key !== e.target.key) {
+        return item;
+      }
+      return postDelete;
+    });
+
+    this.setState({
+      todoList: postDelete
+    });
   };
 
   render() {
@@ -110,10 +142,13 @@ class Input extends React.Component {
           </button>
         </form>
         <ul className='p-0'>
-          <List list={this.state.todoList} />
+          <List clickDelete={this.clickDelete} list={this.state.todoList} />
         </ul>
-        <Buttons clickClear={this.clear} />
-        <Delete />
+        <Buttons
+          clickClear={this.clear}
+          clickDelete={this.clickDelete}
+          clickAll={this.clickAll}
+        />
       </React.Fragment>
     );
   }
